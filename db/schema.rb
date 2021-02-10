@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_013838) do
 
   create_table "baking_slots", force: :cascade do |t|
     t.datetime "slot"
+    t.integer "slot_count", default: 0
+    t.integer "max_slots"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,7 +34,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_013838) do
 
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.bigint "baking_slot_id", null: false
+    t.bigint "baking_slot_id"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["baking_slot_id"], name: "index_order_items_on_baking_slot_id"
@@ -41,6 +44,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_013838) do
 
   create_table "orders", force: :cascade do |t|
     t.string "reference_code"
+    t.integer "slot_count", default: 0
+    t.boolean "paid"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
