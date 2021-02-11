@@ -24,6 +24,7 @@ class Api::V1::OrdersController < ApplicationController
       :user_id,
       :first_name,
       :last_name,
+      :paid,
       :baking_slot_id,
       orders: [
         :quantity, :product_id
