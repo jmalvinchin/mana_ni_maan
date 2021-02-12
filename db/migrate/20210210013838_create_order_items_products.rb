@@ -1,6 +1,6 @@
-class CreateOrderItemProducts < ActiveRecord::Migration[6.1]
+class CreateOrderItemsProducts < ActiveRecord::Migration[6.1]
   def change
-    create_table :order_item_products do |t|
+    create_table :order_items_products do |t|
       t.references :order_item, null: false, foreign_key: true
       t.references :product, null: false, foreign_key: true
 

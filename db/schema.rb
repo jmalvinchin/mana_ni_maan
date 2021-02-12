@@ -32,15 +32,6 @@ ActiveRecord::Schema.define(version: 2021_02_11_062127) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_item_products", force: :cascade do |t|
-    t.bigint "order_item_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_item_id"], name: "index_order_item_products_on_order_item_id"
-    t.index ["product_id"], name: "index_order_item_products_on_product_id"
-  end
-
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "baking_slot_id"
@@ -49,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_02_11_062127) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["baking_slot_id"], name: "index_order_items_on_baking_slot_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "order_items_products", force: :cascade do |t|
+    t.bigint "order_item_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_item_id"], name: "index_order_items_products_on_order_item_id"
+    t.index ["product_id"], name: "index_order_items_products_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -86,9 +86,9 @@ ActiveRecord::Schema.define(version: 2021_02_11_062127) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "order_item_products", "order_items"
-  add_foreign_key "order_item_products", "products"
   add_foreign_key "order_items", "baking_slots"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items_products", "order_items"
+  add_foreign_key "order_items_products", "products"
   add_foreign_key "orders", "customers"
 end
