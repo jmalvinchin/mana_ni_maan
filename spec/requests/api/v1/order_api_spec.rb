@@ -1,6 +1,9 @@
 require "rails_helper"
 
 describe "Order API" do
+  let!(:user) { create(:user) }
+  let!(:auth_helpers_auth_token) { user.create_new_auth_token }
+
   context "#index" do
     let!(:order) { create(:order) }
     let!(:order_item) { create(:order_item, order: order) }
