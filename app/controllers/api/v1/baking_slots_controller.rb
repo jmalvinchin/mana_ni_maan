@@ -1,4 +1,6 @@
 class Api::V1::BakingSlotsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @baking_slots = BakingSlot.all
   end

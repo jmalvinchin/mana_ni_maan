@@ -1,13 +1,15 @@
 require "rails_helper"
 
 describe "Baking Slot API", type: :request do
+  let!(:user) { create(:user) }
+  let!(:auth_helpers_auth_token) { user.create_new_auth_token }
+
   context "#index" do
     let!(:baking_slot) { create(:baking_slot) }
-
     it "retrieves list of baking slots" do
       get "/api/v1/baking_slots"
 
-      expect(response.status).to be 200
+      expect(response.status).to eq 200
 
       results = JSON.parse(response.body)
       baking_slot = results[0]
