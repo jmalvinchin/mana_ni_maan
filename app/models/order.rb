@@ -1,9 +1,20 @@
 class Order < ApplicationRecord
+  include Filterable
+
   belongs_to :customer
   has_many :order_items
   before_save :generate_reference_code
 
   validates :reference_code, uniqueness: true
+
+  scope :filter_by_reference_code, -> (code) { where(reference_code: code) }
+  scope :filter_by_slot_count, -> (slot_count) { where(slot_count: slot_count) }
+  scope :filter_by_paid, -> (paid) { where(paid: paid) }
+  scope :filter_by_customer_id, -> (customer_id) { where(customer_id: customer_id) }
+
+  def self.filter_by_allocated(value)
+    joins(:order_items).where("order_items.status": ORDER_STATUS[:allocated])
+  end
 
   def allocated?
     order_items.all? { |item| item.status == ORDER_STATUS[:allocated] }

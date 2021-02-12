@@ -2,7 +2,7 @@ class Api::V1::BakingSlotsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @baking_slots = BakingSlot.filter(params.slice[:slot])
+    @baking_slots = BakingSlot.filter(params.slice(:slot))
   end
 
   def show

@@ -2,7 +2,15 @@ class Api::V1::OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @orders = Order.all
+    filter_params = params.slice(
+      :reference_code,
+      :slot_count,
+      :paid,
+      :customer_id,
+      :allocated
+    )
+
+    @orders = Order.filter(filter_params)
   end
 
   def show
