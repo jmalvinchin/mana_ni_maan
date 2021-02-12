@@ -21,7 +21,7 @@ class Api::V1::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-      :user_id,
+      :customer_id,
       :first_name,
       :last_name,
       :paid,

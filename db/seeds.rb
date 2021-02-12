@@ -12,8 +12,8 @@ slot1 = BakingSlot.create(slot: DateTime.now + 1.year, slot_count: 3, max_slots:
 product1 = Product.create(name: "Apple Cinnamon")
 product2 = Product.create(name: "Dark Fudge")
 
-customer1 = User.create(first_name: "John", last_name: "Doe")
-customer2 = User.create(first_name: "Jane", last_name: "Doe")
+customer1 = Customer.create(first_name: "John", last_name: "Doe")
+customer2 = Customer.create(first_name: "Jane", last_name: "Doe")
 
 order1 = Order.create(
   slot_count: 2,

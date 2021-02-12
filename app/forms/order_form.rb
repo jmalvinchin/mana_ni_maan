@@ -23,10 +23,10 @@ class OrderForm
   private
 
   def attach_customer_details
-    if @params[:user_id]
-      @order.customer = User.find(@params[:user_id])
+    if @params[:customer_id]
+      @order.customer = Customer.find(@params[:customer_id])
     else
-      @order.customer = User.find_or_create_by(first_name: @params[:first_name], last_name: @params[:last_name])
+      @order.customer = Customer.find_or_create_by(first_name: @params[:first_name], last_name: @params[:last_name])
     end
   end
 

@@ -52,14 +52,14 @@ describe OrderForm do
               product_id: product2.id
             }
           ]
-        }.merge(user_hash)
+        }.merge(customer_hash)
       end
 
-      context "using existing user_id" do
-        let(:user) { create(:user, first_name: "Existing", last_name: "Customer") }
-        let(:user_hash) do
+      context "using existing customer_id" do
+        let(:customer) { create(:customer, first_name: "Existing", last_name: "Customer") }
+        let(:customer_hash) do
           {
-            user_id: user.id
+            customer_id: customer.id
           }
         end
 
@@ -67,14 +67,14 @@ describe OrderForm do
           form = OrderForm.new(params)
           expect(form.save).to eq true
 
-          expect(form.order.customer).to eq user
-          expect(form.order.customer.first_name).to eq user.first_name
-          expect(form.order.customer.last_name).to eq user.last_name
+          expect(form.order.customer).to eq customer
+          expect(form.order.customer.first_name).to eq customer.first_name
+          expect(form.order.customer.last_name).to eq customer.last_name
         end
       end
 
       context "using customer name" do
-        let(:user_hash) do
+        let(:customer_hash) do
           {
             first_name: "New",
             last_name: "Customer",
