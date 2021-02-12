@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_items
+  before_save :generate_reference_code
+
+  validates :reference_code, uniqueness: true
 
   def allocated?
     order_items.all? { |item| item.status == ORDER_STATUS[:allocated] }
@@ -16,5 +19,14 @@ class Order < ApplicationRecord
       order_hash[item.product.name] += 1
     end
     order_hash
+  end
+
+  private
+
+  def generate_reference_code
+    loop do
+      self.reference_code = SecureRandom.hex(3).upcase
+      break if Order.find_by(reference_code: reference_code).nil?
+    end
   end
 end
