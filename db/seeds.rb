@@ -56,3 +56,6 @@ order2_oi1 = OrderItem.create(
   status: "pending",
   product: product1
 )
+
+user1 = User.create!(email: "test@test.com", password: "test1234")
+user1.create_new_auth_token
